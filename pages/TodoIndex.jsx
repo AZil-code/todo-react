@@ -19,7 +19,7 @@ export function TodoIndex() {
 
    useEffect(() => {
       loadTodos(filterBy).catch(() => showErrorMsg('Cannot load todos'));
-   }, [filterBy]);
+   }, [filterBy, todos]);
 
    function onRemoveTodo(todoId) {
       if (!confirm('Sure?')) return;
@@ -44,6 +44,7 @@ export function TodoIndex() {
       return {
          txt: searchParams.get('txt'),
          importance: searchParams.get('importance'),
+         status: searchParams.get('status'),
       };
    }
 
@@ -51,6 +52,7 @@ export function TodoIndex() {
       const newParams = {};
       if (filterBy.txt) newParams.txt = filterBy.txt;
       if (filterBy.importance) newParams.importance = filterBy.importance;
+      if (filterBy.status) newParams.status = filterBy.status;
       setSearchParams(newParams);
    }
 

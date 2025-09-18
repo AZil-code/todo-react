@@ -25,7 +25,6 @@ export async function removeTodoOptimistic(todoId) {
 
 export async function saveTodo(todo) {
    const type = todo._id ? UPDATE_TODO : ADD_TODO;
-   console.log(type);
    try {
       const savedTodo = await todoService.save(todo);
       store.dispatch({ type: type, todo: savedTodo });

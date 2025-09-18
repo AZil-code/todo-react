@@ -54,6 +54,12 @@ export function TodoFilter({ filterBy, onSetFilterBy }) {
                id="importance"
                name="importance"
             />
+            <label htmlFor="status">Status: </label>
+            <select value={filterBy.status} onChange={handleChange} id="status" name="status">
+               <option>All</option>
+               <option>Active</option>
+               <option>Done</option>
+            </select>
 
             <button hidden>Set Filter</button>
          </form>
