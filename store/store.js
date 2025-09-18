@@ -8,5 +8,6 @@ const rootReducer = combineReducers({
    userModule: userReducer,
 });
 
-export const store = createStore(rootReducer);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(rootReducer, composeEnhancers());
 store.subscribe(() => console.log('Current statea is: ', store.getState()));
