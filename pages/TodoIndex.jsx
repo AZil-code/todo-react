@@ -18,8 +18,12 @@ export function TodoIndex() {
    }, [searchParams]);
 
    useEffect(() => {
+      onLoadTodos();
+   }, [filterBy]);
+
+   function onLoadTodos() {
       loadTodos(filterBy).catch(() => showErrorMsg('Cannot load todos'));
-   }, [filterBy, todos]);
+   }
 
    function onRemoveTodo(todoId) {
       if (!confirm('Sure?')) return;
@@ -37,7 +41,8 @@ export function TodoIndex() {
 
       saveTodo(todoToSave)
          .then((savedTodo) => showSuccessMsg(`Todo is ${savedTodo.isDone ? 'done' : 'back on your list'}`))
-         .catch(() => showErrorMsg('Cannot togle todo ' + todo._id));
+         .catch(() => showErrorMsg('Cannot togle todo ' + todo._id))
+         .finally(() => onLoadTodos());
    }
 
    function extractSearchParams() {
