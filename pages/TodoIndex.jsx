@@ -22,6 +22,7 @@ export function TodoIndex() {
    }, [filterBy]);
 
    function onRemoveTodo(todoId) {
+      if (!confirm('Sure?')) return;
       removeTodoOptimistic(todoId)
          .then(() => showSuccessMsg('Todo removed successfully!'))
          .catch((err) => showErrorMsg('Failed removing todo item! ', err));
