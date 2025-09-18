@@ -1,5 +1,6 @@
 import { todoService } from '../../services/todo.service.js';
 
+// Todo
 export const SET_TODOS = 'SET_TODOS';
 export const REMOVE_TODO = 'REMOVE_TODO';
 export const ADD_TODO = 'ADD_TODO';
@@ -9,6 +10,7 @@ export const UNDO_TODOS = 'UNDO_TODOS';
 
 const initialState = {
    todos: [],
+   filterBy: {},
 };
 
 export function todoReducer(state = initialState, cmd) {
@@ -27,6 +29,9 @@ export function todoReducer(state = initialState, cmd) {
       }
       case UNDO_TODOS: {
          return { ...state, todos: [...state.lastTodos] };
+      }
+      case SET_FILTER_BY: {
+         return { ...state, filterBy: { ...state.filterBy, ...cmd.filterBy } };
       }
       default:
          return state;

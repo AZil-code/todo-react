@@ -1,5 +1,5 @@
 import { todoService } from '../../services/todo.service.js';
-import { ADD_TODO, REMOVE_TODO, SET_TODOS, UNDO_TODOS, UPDATE_TODO } from '../reducers/todo.reducer.js';
+import { ADD_TODO, REMOVE_TODO, SET_FILTER_BY, SET_TODOS, UNDO_TODOS, UPDATE_TODO } from '../reducers/todo.reducer.js';
 import { store } from '../store.js';
 
 export function loadTodos(filterBy) {
@@ -34,4 +34,8 @@ export async function saveTodo(todo) {
       console.error('todo action -> Cannot save car: ', error);
       throw error;
    }
+}
+
+export function setFilterBy(filterBy) {
+   store.dispatch({ type: SET_FILTER_BY, filterBy });
 }
