@@ -39,7 +39,7 @@ export function TodoIndex() {
    function onToggleTodo(todo) {
       const todoToSave = { ...todo, isDone: !todo.isDone };
 
-      saveTodo(todoToSave)
+      saveTodo(todoToSave, todo)
          .then((savedTodo) => showSuccessMsg(`Todo is ${savedTodo.isDone ? 'done' : 'back on your list'}`))
          .catch(() => showErrorMsg('Cannot togle todo ' + todo._id))
          .finally(() => onLoadTodos());

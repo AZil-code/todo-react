@@ -1,5 +1,5 @@
 import { userService } from '../../services/user.service.js';
-import { SET_USER } from '../reducers/user.reducer.js';
+import { INCREMENT_BALANCE, SET_USER } from '../reducers/user.reducer.js';
 import { store } from '../store.js';
 
 export async function login(credentials) {
@@ -32,4 +32,14 @@ export function logout() {
          console.error('user actions -> Cannot logout: ', error);
          throw error;
       });
+}
+
+export async function incrementBalance() {
+   try {
+      const updatedBalance = await userService.incrementBalance();
+      store.dispatch({ type: INCREMENT_BALANCE, balance: updatedBalance });
+   } catch (error) {
+      console.error('user actions -> Cannot increment balance: ', error);
+      throw error;
+   }
 }
