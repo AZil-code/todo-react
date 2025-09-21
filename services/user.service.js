@@ -9,6 +9,7 @@ export const userService = {
    query,
    getEmptyCredentials,
    incrementBalance,
+   logActivity,
 };
 const STORAGE_KEY_LOGGEDIN = 'user';
 const STORAGE_KEY = 'userDB';
@@ -54,11 +55,15 @@ async function incrementBalance() {
       .then((user) => {
          _setLoggedinUser(user);
          return user.balance;
-      })
-      .catch((err) => {
-         console.error('user service -> Cannot increment balance: ', err);
-         throw err;
       });
+}
+
+function logActivity(activity) {
+   const userId = getLoggedinUser()._id;
+   return getById(userId).then((user) => {
+      user.activities.push(activity);
+      return storageService.put(STORAGE_KEY, user);
+   });
 }
 
 function _setLoggedinUser(user) {

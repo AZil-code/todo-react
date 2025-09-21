@@ -1,6 +1,7 @@
 import { todoService } from '../services/todo.service.js';
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 import { saveTodo } from '../store/actions/todo.actions.js';
+import { logActivity } from '../store/actions/user.actions.js';
 
 const { useState, useEffect, useRef } = React;
 const { useNavigate, useParams } = ReactRouterDOM;
@@ -51,6 +52,7 @@ export function TodoEdit() {
 
       saveTodo(todoToEdit, oldTodo.current)
          .then((savedTodo) => {
+            logActivity(`${oldTodo.current._id ? `Editted the todo: ` : 'Added a todo: '} "${savedTodo.txt}"`);
             navigate('/todo');
             showSuccessMsg(`Todo Saved (id: ${savedTodo._id})`);
          })

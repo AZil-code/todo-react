@@ -43,3 +43,13 @@ export async function incrementBalance() {
       throw error;
    }
 }
+
+export async function logActivity(activitytxt) {
+   return userService
+      .logActivity({ txt: activitytxt, at: Date.now() })
+      .then((user) => user.activity)
+      .catch((error) => {
+         console.error('user actions -> Cannot log activity: ', error);
+         throw error;
+      });
+}

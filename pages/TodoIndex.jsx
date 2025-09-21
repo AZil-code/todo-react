@@ -3,6 +3,7 @@ import { TodoList } from '../cmps/TodoList.jsx';
 import { DataTable } from '../cmps/data-table/DataTable.jsx';
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 import { loadTodos, removeTodoOptimistic, saveTodo, setFilterBy } from '../store/actions/todo.actions.js';
+import { logActivity } from '../store/actions/user.actions.js';
 
 const { useEffect } = React;
 const { Link, useSearchParams } = ReactRouterDOM;
@@ -25,10 +26,13 @@ export function TodoIndex() {
       loadTodos(filterBy).catch(() => showErrorMsg('Cannot load todos'));
    }
 
-   function onRemoveTodo(todoId) {
+   function onRemoveTodo(todoId, todoTxt = '') {
       if (!confirm('Sure?')) return;
       removeTodoOptimistic(todoId)
-         .then(() => showSuccessMsg('Todo removed successfully!'))
+         .then(() => {
+            logActivity(`Removed the todo: "${todoTxt}"`);
+            showSuccessMsg('Todo removed successfully!');
+         })
          .catch((err) => showErrorMsg('Failed removing todo item! ', err));
    }
 
