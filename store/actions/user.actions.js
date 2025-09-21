@@ -1,5 +1,6 @@
 import { userService } from '../../services/user.service.js';
-import { INCREMENT_BALANCE, SET_USER } from '../reducers/user.reducer.js';
+import { utilService } from '../../services/util.service.js';
+import { INCREMENT_BALANCE, UPDATE_USER, SET_USER } from '../reducers/user.reducer.js';
 import { store } from '../store.js';
 
 export async function login(credentials) {
@@ -57,3 +58,20 @@ export function logActivity(activitytxt) {
          throw error;
       });
 }
+
+export function updateUser(updatedUser) {
+   const currUser = userService.getLoggedinUser();
+   return userService
+      .save({ ...currUser, ...updatedUser })
+      .then(() => store.dispatch({ type: UPDATE_USER, newUser: updatedUser }))
+      .catch((error) => {
+         console.error('user actions -> Cannot set preferences: ', error);
+         throw error;
+      });
+}
+
+// export function setAppColors(prefs) {
+//    const colors = {};
+//    colors[--gray3] = prefs.color;
+//    utilService.setAppColors(colors);
+// }
