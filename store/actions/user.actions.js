@@ -36,17 +36,21 @@ export function logout() {
 
 export async function incrementBalance() {
    try {
-      const updatedBalance = await userService.incrementBalance();
-      store.dispatch({ type: INCREMENT_BALANCE, balance: updatedBalance });
+      const user = userService.getLoggedinUser();
+      user.balance += 10;
+      const updatedUser = await userService.save(user);
+      store.dispatch({ type: INCREMENT_BALANCE, balance: updatedUser.balance });
    } catch (error) {
       console.error('user actions -> Cannot increment balance: ', error);
       throw error;
    }
 }
 
-export async function logActivity(activitytxt) {
+export function logActivity(activitytxt) {
+   const user = userService.getLoggedinUser();
+   user.activities = [{ txt: activitytxt, at: Date.now() }];
    return userService
-      .logActivity({ txt: activitytxt, at: Date.now() })
+      .save(user)
       .then((user) => user.activity)
       .catch((error) => {
          console.error('user actions -> Cannot log activity: ', error);

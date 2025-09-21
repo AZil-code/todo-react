@@ -36,7 +36,7 @@ export async function saveTodo(todo, oldTodo = {}) {
       }
       return savedTodo;
    } catch (error) {
-      console.error('todo action -> Cannot save car: ', error);
+      console.error('todo action -> Cannot save todo: ', error);
       throw error;
    }
 }
