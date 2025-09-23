@@ -80,8 +80,9 @@ export function updateUser(updatedUser) {
       });
 }
 
-// export function setAppColors(prefs) {
-//    const colors = {};
-//    colors[--gray3] = prefs.color;
-//    utilService.setAppColors(colors);
-// }
+export function setAppColors(prefs) {
+   const colors = {};
+   if (prefs.color) colors['--gray3'] = prefs.color;
+   if (prefs.bgColor) colors['--bg-color'] = prefs.bgColor;
+   utilService.setAppColors(colors);
+}

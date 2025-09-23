@@ -9,6 +9,7 @@ export const userService = {
    query,
    getEmptyCredentials,
    save,
+   getDefaultPrefs,
 };
 const STORAGE_KEY_LOGGEDIN = 'user';
 const STORAGE_KEY = 'userDB';
@@ -34,7 +35,7 @@ function signup({ username, password, fullname }) {
    user.createdAt = user.updatedAt = Date.now();
    user.balance = 0;
    user.activities = [];
-   user.prefs = _getDefaultPrefs();
+   user.prefs = getDefaultPrefs();
 
    return storageService.post(STORAGE_KEY, user).then(_setLoggedinUser);
 }
@@ -70,8 +71,8 @@ function _setLoggedinUser(user) {
    return userToSave;
 }
 
-function _getDefaultPrefs() {
-   return { color: 'black', bgColor: 'white' };
+function getDefaultPrefs() {
+   return { color: 'rgb(44, 44, 44)', bgColor: 'transperent' };
 }
 
 function getEmptyCredentials() {

@@ -3,12 +3,14 @@ const { Link, NavLink } = ReactRouterDOM;
 import { UserMsg } from './UserMsg.jsx';
 import { LoginSignup } from './LoginSignup.jsx';
 import { showErrorMsg } from '../services/event-bus.service.js';
-import { logout } from '../store/actions/user.actions.js';
+import { logout, setAppColors } from '../store/actions/user.actions.js';
+import { userService } from '../services/user.service.js';
 
 const { useSelector } = ReactRedux;
 
 export function AppHeader() {
    const user = useSelector((storageState) => storageState.userModule.loggedInUser);
+   setAppColors(user ? user.prefs : userService.getDefaultPrefs());
 
    function onLogout() {
       logout().catch((err) => {

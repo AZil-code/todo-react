@@ -5,7 +5,7 @@ export const utilService = {
    loadFromStorage,
    saveToStorage,
    animateCSS,
-   // setAppColors,
+   setAppColors,
    timeAgo,
 };
 
@@ -90,10 +90,13 @@ function animateCSS(el, animation = 'bounce') {
    });
 }
 
-// // { cssVarName: value }
-// function setAppColors(colors) {
-//    colors.entries().forEach(([cssName, value]) => document.documentElement.style.setProperty(cssName, value));
-// }
+// { cssVarName: value }
+function setAppColors(colors) {
+   const root = document.documentElement;
+   Object.entries(colors).forEach(([cssName, value]) => {
+      root.style.setProperty(cssName, value);
+   });
+}
 
 function timeAgo(timestamp) {
    const now = new Date();
