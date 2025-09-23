@@ -59,6 +59,16 @@ export function logActivity(activitytxt) {
       });
 }
 
+export function getActivities(userId) {
+   return userService
+      .getById(userId)
+      .then((user) => user.activities)
+      .catch((error) => {
+         console.error('user actions -> Cannot get activities: ', error);
+         throw error;
+      });
+}
+
 export function updateUser(updatedUser) {
    const currUser = userService.getLoggedinUser();
    return userService

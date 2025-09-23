@@ -51,7 +51,7 @@ function getLoggedinUser() {
 function save(updatedUser) {
    return getById(updatedUser._id)
       .then((user) => {
-         if (updatedUser.activities) user.activities = [...user.activities, ...updatedUser.activities];
+         if (updatedUser.activities) updatedUser.activities = [...user.activities, ...updatedUser.activities];
          return storageService.put(STORAGE_KEY, {
             ...user,
             ...updatedUser,

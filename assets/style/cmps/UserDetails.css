@@ -1,0 +1,21 @@
+.user-details {
+   border: 1px solid #ccc;
+   padding: 20px;
+   margin-bottom: 20px;
+   border-radius: 8px;
+   background-color: #f9f9f9;
+}
+
+.user-details form {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+}
+
+.user-details form input {
+   margin-right: 10px;
+}
+
+.user-activity span {
+   color: gray;
+}
